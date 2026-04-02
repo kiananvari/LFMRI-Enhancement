@@ -1,0 +1,100 @@
+dataset_params:
+  data_dir: "/path/to/m4raw_h5"
+  dataset: "m4raw"
+  train_split: "train"
+  val_split: "val"
+  test_split: "test"
+  batch_size: 4
+  num_workers: 4
+  trim_top_bottom_frac: 0.0
+  resize_after_trim: true
+  nx: 256
+  ny: 256
+  image_key: "reconstruction_rss"
+  kspace_key: "kspace"
+  split_json: null
+  max_train_files: null
+  max_val_files: null
+  max_test_files: null
+  max_slices_per_volume: null
+
+  jointly_reconstructing: true
+  guided_single_contrast: false
+  permute_contrasts: true
+  num_permutations_per_slice: 4
+  permutation_seed: 0
+  include_identity_permutation: true
+
+  val_permute_contrasts: false
+  val_num_permutations_per_slice: 4
+  val_permutation_seed: 0
+  val_include_identity_permutation: true
+
+  contrasts:
+    - "t1"
+    - "t2"
+    - "flair"
+
+  # Train loss uses all contrasts.
+  contrast_excluding_training: []
+
+  validate_on_target: false
+  target_dataset_path: "/path/to/brats_h5"
+  target_dataset: "brats"
+  target_test_split: "test"
+  target_split_json: null
+  target_image_key: "reconstruction_rss"
+  target_kspace_key: "kspace"
+  target_max_test_files: null
+
+simulation_params:
+  noise_std: 10
+  apply_contrast: true
+  gamma: 0.70
+  contrast_gamma: 0.70
+  noise_std_range: null
+  gamma_range: null
+  contrast_gamma_range: null
+  deterministic_eval: true
+
+model:
+  type: "unet"
+  variant: "default"
+
+training_params:
+  seed: 42
+  sanity_check: false
+  sanity_data_dir: "fastMRI_denoising_repo/deta_demo/m4raw"
+  sanity_max_files: 1
+  sanity_use_split_json: false
+  sanity_max_epochs: 5
+  sanity_batch_size: 1
+  sanity_num_workers: 0
+  sanity_log_every_n_steps: 1
+
+  lr: 0.0003
+  weight_decay: 0.00001
+  image_loss: "ssim"
+  kspace_loss: "l1"
+  lambda_image: 1.0
+  lambda_kspace: 0.1
+  max_epochs: 100
+  accelerator: "auto"
+  devices: "auto"
+  precision: "32"
+  log_every_n_steps: 20
+  run_test: true
+  early_stopping_patience: 10
+  early_stopping_min_delta: 0.0
+
+logging_params:
+  project: "mri_denoise_transfer"
+  run_name: "m4raw_multi_contrast_perm_ood"
+  default_root_dir: "fastMRI_denoising_repo/logs"
+  wandb_mode: "online"
+  wandb_entity: null
+  wandb_log_model: false
+  val_image_log_count: 4
+  val_image_log_every_n_epochs: 1
+  test_log_all_images: true
+

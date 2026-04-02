@@ -1,0 +1,11 @@
+torch
+pytorch-lightning
+lightning-fabric
+wandb
+numpy
+pyyaml
+pillow
+h5py
+matplotlib
+# Optional (only if using the UNETR model)
+monai
