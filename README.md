@@ -1,6 +1,6 @@
 # LFMRI-Enhancement
 
-This repository contains code and configuration files for MRI enhancement and denoising experiments.
+This repository contains code and configuration files for Low-field MRI enhancement and denoising experiments.
 
 **Low-Field MRI Denoising and Enhancement Using Deep Learning**
 Kian Anvari Hamedani¹², Nasim Bandar Sahebi¹³
